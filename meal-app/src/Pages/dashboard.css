@@ -1,0 +1,73 @@
+.dashboard-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+  background: #f7f1fc;
+  color: #35254b;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.dashboard-card {
+  width: min(100%, 560px);
+  padding: 40px;
+  border: 1px solid #e8def1;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 18px 48px rgba(91, 55, 135, 0.12);
+}
+
+.dashboard-brand {
+  color: #7548a9;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.dashboard-eyebrow {
+  margin: 32px 0 8px;
+  color: #8054b8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.dashboard-card h1 {
+  margin: 0 0 12px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 32px;
+}
+
+.dashboard-card p {
+  line-height: 1.6;
+}
+
+.dashboard-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.dashboard-actions a,
+.dashboard-actions button {
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 9px;
+  background: #8054b8;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dashboard-actions a:hover,
+.dashboard-actions button:hover {
+  background: #633b98;
+}
+
+@media (max-width: 520px) {
+  .dashboard-card {
+    padding: 28px 22px;
+  }
+}

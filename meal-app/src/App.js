@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import Home from './Pages/Home';
+import Login from './Pages/Login';
+import Profile from './Pages/Profile';
+import Signup from './Pages/Signup';
+
+const SESSION_KEY = 'mealmind_session';
+
+function getSessionUser() {
+  try {
+    const savedSession = window.localStorage.getItem(SESSION_KEY);
+    return savedSession ? JSON.parse(savedSession) : null;
+  } catch {
+    return null;
+  }
+}
 
 function App() {
+  const sessionUser = getSessionUser();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/login"
+          element={sessionUser ? <Navigate to="/home" replace /> : <Login />}
+        />
+        <Route
+          path="/signup"
+          element={sessionUser ? <Navigate to="/home" replace /> : <Signup />}
+        />
+        <Route
+          path="/home"
+          element={sessionUser ? <Home /> : <Navigate to="/" replace />}
+        />
+       
+        <Route
+          path="/profile"
+          element={sessionUser ? <Profile /> : <Navigate to="/" replace />}
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
 
