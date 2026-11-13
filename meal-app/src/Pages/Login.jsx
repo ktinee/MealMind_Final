@@ -77,9 +77,9 @@ function Login() {
   return (
     <main className="login-page">
 
-      <div className="login-decoration decoration-one"></div>
-      <div className="login-decoration decoration-two"></div>
-      <div className="login-decoration decoration-three"></div>
+      <div className="login-decoration decoration-one" aria-hidden="true"></div>
+      <div className="login-decoration decoration-two" aria-hidden="true"></div>
+      <div className="login-decoration decoration-three" aria-hidden="true"></div>
 
       <div className="login-card">
 

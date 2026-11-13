@@ -17,19 +17,26 @@
     margin: 0;
     place-items: center;
     overflow: hidden;
-    padding: 32px 20px;
+    box-sizing: border-box;
+    padding: clamp(20px, 5vw, 48px);
     color: var(--login-ink);
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
     background-color: #f7f1fc;
     background-image:
-        radial-gradient(circle at 15% 20%, rgba(229, 213, 245, 0.65), transparent 34%),
-        linear-gradient(rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04));
+        linear-gradient(120deg, rgba(55, 30, 85, 0.12), rgba(255, 255, 255, 0.12)),
+        url('./bg.png');
 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+}
+
+.login-page *,
+.login-page *::before,
+.login-page *::after {
+    box-sizing: border-box;
 }
 
 .login-page::before,
@@ -96,7 +103,7 @@
 
 .login-card {
     width: min(100%, 440px);
-    padding: 44px 46px 32px;
+    padding: clamp(32px, 5vw, 46px) clamp(24px, 6vw, 46px) 36px;
     position: relative;
     z-index: 1;
     overflow: hidden;
@@ -104,14 +111,14 @@
     border: 1px solid rgba(255, 255, 255, 0.9);
     border-radius: 24px;
 
-    background: rgba(250, 246, 255, 0.94);
+    background: rgba(255, 253, 255, 0.94);
 
     box-shadow:
-        0 26px 70px rgba(91, 55, 135, 0.18),
-        0 3px 12px rgba(91, 55, 135, 0.08);
+        0 28px 80px rgba(55, 30, 85, 0.22),
+        0 4px 16px rgba(55, 30, 85, 0.08);
 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 
     animation: login-appear 500ms ease both;
 }
@@ -150,7 +157,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 38px;
+    margin-bottom: 32px;
 
     color: var(--login-ink);
     font-size: 21px;
@@ -203,7 +210,7 @@
 .login-heading p {
     margin: 0;
     color: var(--login-muted);
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.6;
 }
 
@@ -228,14 +235,14 @@
 
 .login-field input {
     width: 100%;
-    height: 50px;
+    height: 52px;
     padding: 0 15px;
 
     border: 1px solid #e2d5f0;
     border-radius: 10px;
     outline: none;
 
-    background: #f1eafb;
+    background: rgba(248, 243, 253, 0.9);
     color: var(--login-ink);
 
     font: inherit;
@@ -298,7 +305,7 @@
 .login-button {
     display: flex;
     width: 100%;
-    min-height: 51px;
+    min-height: 52px;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -424,7 +431,7 @@
     }
 
     .login-card {
-        padding: 36px 25px 27px;
+        padding: 32px 24px 28px;
         border-radius: 20px;
     }
 
