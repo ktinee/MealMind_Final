@@ -1,4 +1,4 @@
-import { getMealMindStorageKey } from "./mealPlanStorage";
+import { getMealMindStorageKey } from "./mealPlan";
 
 const FAVORITES_KEY = "mealMindFavoriteMeals";
 

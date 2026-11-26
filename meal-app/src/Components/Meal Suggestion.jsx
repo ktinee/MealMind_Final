@@ -6,7 +6,7 @@ import {
   saveFavoriteMeal
 } from "./favoriteMealsStorage";
 import { getMealRecipe } from "./mealRecipeUtils";
-import { readCurrentMealPlan } from "./mealPlanStorage";
+import { readCurrentMealPlan } from "./mealPlan";
 import "./style.css";
 import logo from "../Pages/logo.png";
 

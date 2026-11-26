@@ -1,4 +1,5 @@
-jest.mock('../Components/mealPlanApi', () => ({
+jest.mock('../Components/mealPlan', () => ({
+  ...jest.requireActual('../Components/mealPlan'),
   deleteAllMealPlans: jest.fn(),
   deleteMealPlan: jest.fn(),
   loadMealPlans: jest.fn(),
@@ -7,11 +8,11 @@ jest.mock('../Components/mealPlanApi', () => ({
 }));
 
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { toDateInputValue } from '../Components/mealPlanUtils';
+import { toDateInputValue } from '../Components/mealPlan';
 import {
   loadMealPlans,
   loadMostGeneratedMeals,
-} from '../Components/mealPlanApi';
+} from '../Components/mealPlan';
 import Home from './Home';
 
 afterEach(() => {

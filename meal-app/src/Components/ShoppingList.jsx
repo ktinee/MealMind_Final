@@ -1,8 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { getMealRecipe } from "./mealRecipeUtils";
-import { toDateInputValue } from "./mealPlanUtils";
-import { getMealMindStorageKey,  deleteMealPlanSnapshot, readMealPlanHistory} from "./mealPlanStorage";
-import { deleteMealPlan as deleteMealPlanFromApi, loadMealPlans } from "./mealPlanApi";
+import {
+  toDateInputValue,
+  getMealMindStorageKey,
+  deleteMealPlanSnapshot,
+  readMealPlanHistory,
+  deleteMealPlan as deleteMealPlanFromApi,
+  loadMealPlans
+} from "./mealPlan";
 import "./style.css";
 import logo from "../Pages/logo.png";
 

@@ -10,18 +10,16 @@ import Favorites from "../Components/Favorites";
 import { RECIPES_BY_MEAL } from "../Components/AllRecipe";
 import {
   loadMealPlans,
-  loadMostGeneratedMeals
-} from "../Components/mealPlanApi";
+  loadMostGeneratedMeals,
+  toDateInputValue,
+  readCurrentMealPlan,
+  readMealPlanHistory
+} from "../Components/mealPlan";
 import {
   readFavoriteMeals,
   removeFavoriteMeal,
   saveFavoriteMeal
 } from "../Components/favoriteMealsStorage";
-import { toDateInputValue } from "../Components/mealPlanUtils";
-import {
-  readCurrentMealPlan,
-  readMealPlanHistory
-} from "../Components/mealPlanStorage";
 import { getMealRecipe } from "../Components/mealRecipeUtils";
 import './style.css';
 import logo from "./logo.png";

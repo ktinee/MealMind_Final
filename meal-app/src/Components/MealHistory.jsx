@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {
   archiveCurrentMealPlan,
-  readMealPlanHistory
-} from "./mealPlanStorage";
-import { loadMealPlans } from "./mealPlanApi";
+  readMealPlanHistory,
+  loadMealPlans,
+  toDateInputValue
+} from "./mealPlan";
 import { getMealRecipe } from "./mealRecipeUtils";
-import { toDateInputValue } from "./mealPlanUtils";
 import "./style.css";
 import logo from "../Pages/logo.png";
 
