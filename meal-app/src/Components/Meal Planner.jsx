@@ -1,15 +1,8 @@
 
 import React, { useState } from "react";
-import {
-  MAIN_INGREDIENT_CATEGORIES,
-  RECIPES_BY_MEAL,
-  getAllRecipe
-} from "./AllRecipe";
+import {  MAIN_INGREDIENT_CATEGORIES, RECIPES_BY_MEAL, getAllRecipe} from "./AllRecipe";
 import { saveMealPlan } from "./mealPlanApi";
-import {
-  createMealPlanId,
-  saveMealPlanSnapshot
-} from "./mealPlanStorage";
+import { createMealPlanId, saveMealPlanSnapshot} from "./mealPlanStorage";
 import "./style.css";
 
 const navItems = [

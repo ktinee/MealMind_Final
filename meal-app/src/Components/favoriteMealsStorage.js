@@ -1,32 +1,42 @@
-function getFavoritesKey() {
-  try {
-    const session = JSON.parse(window.localStorage.getItem("mealmind_session") || "null");
-    return `mealMindFavoriteMeals:${session?.userId || session?.username || "guest"}`;
-  } catch {
-    return "mealMindFavoriteMeals:guest";
-  }
-}
+import { getMealMindStorageKey } from "./mealPlanStorage";
+
+const FAVORITES_KEY = "mealMindFavoriteMeals";
 
 export function readFavoriteMeals() {
   try {
-    const meals = JSON.parse(window.localStorage.getItem(getFavoritesKey()) || "[]");
-    return Array.isArray(meals) ? meals : [];
+    const saved = localStorage.getItem(getMealMindStorageKey(FAVORITES_KEY));
+    const favorites = saved ? JSON.parse(saved) : [];
+    return Array.isArray(favorites)
+      ? favorites.filter(meal => meal && typeof meal.name === "string")
+      : [];
   } catch {
     return [];
   }
 }
 
 export function saveFavoriteMeal(meal) {
-  const meals = readFavoriteMeals();
-  const id = meal.id || `${meal.category || "Meal"}:${meal.name.toLowerCase()}`;
-  const saved = { ...meal, id };
-  const next = [saved, ...meals.filter(item => item.id !== id)];
-  window.localStorage.setItem(getFavoritesKey(), JSON.stringify(next));
-  return next;
+  const favorites = readFavoriteMeals();
+  const mealId = `${meal.category || meal.type || ""}:${meal.name}`
+    .toLowerCase();
+  const updatedFavorites = [
+    { ...meal, id: mealId },
+    ...favorites.filter(favorite => favorite.id !== mealId)
+  ];
+
+  localStorage.setItem(
+    getMealMindStorageKey(FAVORITES_KEY),
+    JSON.stringify(updatedFavorites)
+  );
+  return updatedFavorites;
 }
 
-export function removeFavoriteMeal(id) {
-  const next = readFavoriteMeals().filter(meal => meal.id !== id);
-  window.localStorage.setItem(getFavoritesKey(), JSON.stringify(next));
-  return next;
+export function removeFavoriteMeal(mealId) {
+  const updatedFavorites = readFavoriteMeals().filter(
+    meal => meal.id !== mealId
+  );
+  localStorage.setItem(
+    getMealMindStorageKey(FAVORITES_KEY),
+    JSON.stringify(updatedFavorites)
+  );
+  return updatedFavorites;
 }

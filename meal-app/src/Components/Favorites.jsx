@@ -3,7 +3,7 @@ import {
   readFavoriteMeals,
   removeFavoriteMeal
 } from "./favoriteMealsStorage";
-import "./favorites.css";
+import "./style.css";
 
 const navItems = [
   { name: "Home", icon: "⌂" },

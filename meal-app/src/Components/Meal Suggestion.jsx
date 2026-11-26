@@ -7,7 +7,7 @@ import {
 } from "./favoriteMealsStorage";
 import { getMealRecipe } from "./mealRecipeUtils";
 import { readCurrentMealPlan } from "./mealPlanStorage";
-import "./mealSuggestion.css";
+import "./style.css";
 
 const navItems = [
   { name: "Home", icon: "⌂" },

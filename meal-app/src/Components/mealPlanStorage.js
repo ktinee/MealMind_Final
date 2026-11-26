@@ -1,56 +1,101 @@
-function getUserKey() {
+const SESSION_KEY = "mealmind_session";
+
+export function getMealMindStorageKey(baseKey) {
   try {
-    const session = JSON.parse(window.localStorage.getItem("mealmind_session") || "null");
-    return session?.userId || session?.username || "guest";
+    const savedSession = localStorage.getItem(SESSION_KEY);
+    const session = savedSession ? JSON.parse(savedSession) : null;
+    const userKey = session?.userId || session?.username?.toLowerCase() || "guest";
+    return `${baseKey}:${userKey}`;
   } catch {
-    return "guest";
+    return `${baseKey}:guest`;
   }
 }
 
-function readList(key) {
+function readJson(key, fallback) {
   try {
-    const value = JSON.parse(window.localStorage.getItem(key) || "[]");
-    return Array.isArray(value) ? value : [];
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
   } catch {
-    return [];
+    return fallback;
   }
 }
 
-export function readMealPlanHistory() {
-  return readList(`mealMindSavedMealPlans:${getUserKey()}`);
+export function createMealPlanId() {
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 }
 
 export function readCurrentMealPlan() {
-  try {
-    return JSON.parse(
-      window.localStorage.getItem(`mealMindCurrentMealPlan:${getUserKey()}`) || "null"
-    );
-  } catch {
-    return null;
-  }
+  return readJson(getMealMindStorageKey("mealMindPlanner"), null);
 }
 
-export function writeCurrentMealPlan(plan) {
-  window.localStorage.setItem(
-    `mealMindCurrentMealPlan:${getUserKey()}`,
-    JSON.stringify(plan)
+export function writeCurrentMealPlan(planner) {
+  localStorage.setItem(
+    getMealMindStorageKey("mealMindPlanner"),
+    JSON.stringify(planner),
   );
+}
+
+export function clearCurrentMealPlan() {
+  localStorage.removeItem(getMealMindStorageKey("mealMindPlanner"));
+}
+
+export function readMealPlanHistory() {
+  const history = readJson(getMealMindStorageKey("mealMindSavedMealPlans"), []);
+  return Array.isArray(history)
+    ? history.filter(plan => plan && typeof plan === "object" && plan.id)
+    : [];
+}
+
+export function saveMealPlanSnapshot(planner, id) {
   const history = readMealPlanHistory();
-  const planId = plan.id || plan.planId;
-  const next = [plan, ...history.filter(item => item.id !== planId)];
-  window.localStorage.setItem(
-    `mealMindSavedMealPlans:${getUserKey()}`,
-    JSON.stringify(next)
+  const existing = history.find(plan => plan.id === id);
+  const timestamp = new Date().toISOString();
+  const snapshot = {
+    ...planner,
+    id,
+    savedAt: existing?.savedAt || timestamp,
+    updatedAt: timestamp
+  };
+  const updatedHistory = [
+    snapshot,
+    ...history.filter(plan => plan.id !== id)
+  ];
+
+  localStorage.setItem(
+    getMealMindStorageKey("mealMindSavedMealPlans"),
+    JSON.stringify(updatedHistory),
   );
 }
 
-export function removeMealPlanFromStorage(id) {
-  const key = getUserKey();
-  const history = readList(`mealMindSavedMealPlans:${key}`).filter(plan => plan.id !== id);
-  window.localStorage.setItem(`mealMindSavedMealPlans:${key}`, JSON.stringify(history));
-  const current = readCurrentMealPlan();
-  if (current?.id === id || current?.planId === id) {
-    window.localStorage.removeItem(`mealMindCurrentMealPlan:${key}`);
+export function deleteMealPlanSnapshot(id) {
+  const history = readMealPlanHistory();
+  localStorage.setItem(
+    getMealMindStorageKey("mealMindSavedMealPlans"),
+    JSON.stringify(history.filter(plan => plan.id !== id))
+  );
+
+  const currentPlan = readCurrentMealPlan();
+  if ((currentPlan?.planId || "legacy-current-plan") === id) {
+    localStorage.removeItem(getMealMindStorageKey("mealMindPlanner"));
   }
-  return history;
+}
+
+export function deleteAllMealPlanSnapshots() {
+  localStorage.setItem(getMealMindStorageKey("mealMindSavedMealPlans"), JSON.stringify([]));
+  localStorage.removeItem(getMealMindStorageKey("mealMindPlanner"));
+}
+
+export function archiveCurrentMealPlan() {
+  const planner = readCurrentMealPlan();
+  const mealPlan = planner?.mealPlan;
+  if (!mealPlan || typeof mealPlan !== "object" || Array.isArray(mealPlan)) {
+    return;
+  }
+
+  const hasMeals = Object.values(mealPlan).some(
+    day => day && typeof day === "object" && Object.keys(day).length > 0
+  );
+  if (hasMeals) {
+    saveMealPlanSnapshot(planner, planner.planId || "legacy-current-plan");
+  }
 }

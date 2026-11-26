@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
+import logo from './logo.png';
 
 const API_BASE_URL = (
   process.env.REACT_APP_API_URL || 'http://localhost:3001'
@@ -49,8 +50,7 @@ function Signup() {
     <main className="login-page">
       <div className="login-card">
         <a href="/" className="login-brand">
-          <span className="brand-icon">m</span>
-          <span>mealmind</span>
+          <img className="login-brand-image" src={logo} alt="MealMind" />
         </a>
         <div className="login-heading">
           <span className="form-label">GET STARTED</span>

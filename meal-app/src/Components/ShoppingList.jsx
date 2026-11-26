@@ -1,13 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { getMealRecipe } from "./mealRecipeUtils";
 import { toDateInputValue } from "./mealPlanUtils";
-import {
-  getMealMindStorageKey,
-  deleteMealPlanSnapshot,
-  readMealPlanHistory
-} from "./mealPlanStorage";
+import { getMealMindStorageKey,  deleteMealPlanSnapshot, readMealPlanHistory} from "./mealPlanStorage";
 import { deleteMealPlan as deleteMealPlanFromApi, loadMealPlans } from "./mealPlanApi";
-import "./shoppingList.css";
+import "./style.css";
 
 const SHOPPING_CHECKED_KEY = getMealMindStorageKey("mealMindShoppingChecked");
 const MEAL_TYPES = ["Breakfast", "Lunch", "Snack", "Dinner"];

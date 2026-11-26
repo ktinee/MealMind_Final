@@ -1,17 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  archiveCurrentMealPlan,
-  deleteAllMealPlanSnapshots,
-  deleteMealPlanSnapshot,
-  readMealPlanHistory,
-  saveMealPlanSnapshot
-} from "./mealPlanStorage";
-import {
-  deleteAllMealPlans,
-  deleteMealPlan as deleteMealPlanFromApi,
-  loadMealPlans,
-  saveMealPlan
-} from "./mealPlanApi";
+import { archiveCurrentMealPlan, deleteAllMealPlanSnapshots, deleteMealPlanSnapshot, readMealPlanHistory,  saveMealPlanSnapshot} from "./mealPlanStorage";
+import { deleteAllMealPlans, deleteMealPlan as deleteMealPlanFromApi, loadMealPlans, saveMealPlan} from "./mealPlanApi";
 import {
   readFavoriteMeals,
   removeFavoriteMeal,

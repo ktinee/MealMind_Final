@@ -6,7 +6,7 @@ import {
 import { loadMealPlans } from "./mealPlanApi";
 import { getMealRecipe } from "./mealRecipeUtils";
 import { toDateInputValue } from "./mealPlanUtils";
-import "./MealHistory.css";
+import "./style.css";
 
 const navItems = [
   { name: "Home", icon: "⌂" },

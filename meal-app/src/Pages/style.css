@@ -77,6 +77,14 @@ button {
     margin-bottom: 45px;
 }
 
+.meal-logo-image {
+    width: 150px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
 .logo-icon {
     font-size: 32px;
     color: #9466c7;
@@ -700,6 +708,10 @@ button {
         padding: 25px 8px;
     }
 
+    .meal-logo-image {
+        width: 58px;
+    }
+
     .meal-logo {
         justify-content: center;
     }
@@ -812,6 +824,13 @@ button {
   font-size: 19px;
   font-weight: 700;
   text-decoration: none;
+}
+
+.profile-brand-image {
+  width: 126px;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .profile-brand-mark {
@@ -1558,6 +1577,14 @@ button {
     font-weight: 700;
     letter-spacing: -0.8px;
     text-decoration: none;
+}
+
+.login-brand-image {
+    width: 180px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
 }
 
 .brand-icon {

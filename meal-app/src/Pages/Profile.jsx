@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { readFavoriteMeals } from '../Components/favoriteMealsStorage';
 import './style.css';
+import logo from './logo.png';
 
 const SESSION_KEY = 'mealmind_session';
 
@@ -311,8 +312,7 @@ function Profile({ onClose, favoriteMeals, onAddFavorites }) {
           <header className="profile-header profile-drawer-header">
 
             <a href="/" className="profile-brand">
-              <span className="profile-brand-mark">m</span>
-              <span>mealmind</span>
+              <img className="profile-brand-image" src={logo} alt="MealMind" />
             </a>
 
             <button
@@ -338,8 +338,7 @@ function Profile({ onClose, favoriteMeals, onAddFavorites }) {
       <header className="profile-header">
 
         <a href="/" className="profile-brand">
-          <span className="profile-brand-mark">m</span>
-          <span>mealmind</span>
+          <img className="profile-brand-image" src={logo} alt="MealMind" />
         </a>
 
         <nav className="profile-nav">

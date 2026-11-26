@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import './style.css';
+import logo from './logo.png';
 
 const SESSION_KEY = 'mealmind_session';
 
@@ -84,8 +85,7 @@ function Login() {
       <div className="login-card">
 
         <a href="/" className="login-brand">
-          <span className="brand-icon">m</span>
-          <span>mealmind</span>
+          <img className="login-brand-image" src={logo} alt="MealMind" />
         </a>
 
         <div className="login-heading">

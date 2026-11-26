@@ -341,6 +341,52 @@ app.get('/api/recipes', requireSession, async (req, res) => {
   }
 });
 
+app.get('/api/meal-stats/most-generated', requireSession, async (req, res) => {
+  try {
+    const rows = await all(
+      'SELECT planner_json FROM meal_plans WHERE user_id = ?',
+      [req.userId],
+    );
+    const counts = new Map();
+
+    for (const row of rows) {
+      let planner;
+      try {
+        planner = JSON.parse(row.planner_json);
+      } catch {
+        continue;
+      }
+
+      const mealPlan = planner?.mealPlan;
+      if (!mealPlan || typeof mealPlan !== 'object' || Array.isArray(mealPlan)) continue;
+
+      for (const day of Object.values(mealPlan)) {
+        if (!day || typeof day !== 'object' || Array.isArray(day)) continue;
+        for (const [category, meal] of Object.entries(day)) {
+          if (typeof meal?.name !== 'string' || !meal.name.trim()) continue;
+          const key = `${category}\0${meal.name.trim()}`;
+          counts.set(key, (counts.get(key) || 0) + 1);
+        }
+      }
+    }
+
+    const meals = [...counts.entries()]
+      .map(([key, count]) => {
+        const [category, name] = key.split('\0');
+        return { category, name, count };
+      })
+      .sort((first, second) =>
+        second.count - first.count ||
+        first.category.localeCompare(second.category) ||
+        first.name.localeCompare(second.name)
+      );
+    res.json(meals);
+  } catch (error) {
+    console.error('Error loading meal statistics:', error.message);
+    res.status(500).json({ error: 'Unable to load meal statistics.' });
+  }
+});
+
 app.post('/api/meal-plans', requireSession, async (req, res) => {
   const { id, planner, isCurrent = true } = req.body || {};
   if (

@@ -9,8 +9,16 @@ const SESSION_KEY = 'mealmind_session';
 function getSessionUser() {
   try {
     const savedSession = window.localStorage.getItem(SESSION_KEY);
-    return savedSession ? JSON.parse(savedSession) : null;
+    if (!savedSession) return null;
+
+    const session = JSON.parse(savedSession);
+    if (!session?.userId || !session?.sessionToken) {
+      window.localStorage.removeItem(SESSION_KEY);
+      return null;
+    }
+    return session;
   } catch {
+    window.localStorage.removeItem(SESSION_KEY);
     return null;
   }
 }

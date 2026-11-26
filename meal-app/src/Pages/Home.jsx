@@ -24,6 +24,7 @@ import {
 } from "../Components/mealPlanStorage";
 import { getMealRecipe } from "../Components/mealRecipeUtils";
 import './style.css';
+import logo from "./logo.png";
 
 const SESSION_KEY = "mealmind_session";
 
@@ -326,8 +327,7 @@ function Home({ onNavigate, initialPage = "Home" }) {
       <aside className="meal-sidebar">
 
         <div className="meal-logo">
-          <span className="logo-icon"></span>
-          <h2>Meal<span>Mind</span></h2>
+          <img className="meal-logo-image" src={logo} alt="MealMind" />
         </div>
 
         <p className="sidebar-label">MENU</p>
