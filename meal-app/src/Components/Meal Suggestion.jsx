@@ -8,6 +8,7 @@ import {
 import { getMealRecipe } from "./mealRecipeUtils";
 import { readCurrentMealPlan } from "./mealPlanStorage";
 import "./style.css";
+import logo from "../Pages/logo.png";
 
 const navItems = [
   { name: "Home", icon: "⌂" },
@@ -109,8 +110,7 @@ function MealSuggestion({ onNavigate }) {
     <div className="meal-layout planner-layout">
       <aside className="meal-sidebar">
         <div className="meal-logo">
-          <span className="logo-icon">✿</span>
-          <h2>Meal<span>Mind</span></h2>
+          <img className="meal-logo-image" src={logo} alt="MealMind" />
         </div>
         <p className="sidebar-label">MENU</p>
         <div className="sidebar-links">

@@ -4,6 +4,7 @@ import {  MAIN_INGREDIENT_CATEGORIES, RECIPES_BY_MEAL, getAllRecipe} from "./All
 import { saveMealPlan } from "./mealPlanApi";
 import { createMealPlanId, saveMealPlanSnapshot} from "./mealPlanStorage";
 import "./style.css";
+import logo from "../Pages/logo.png";
 
 const navItems = [
   { name: "Home", icon: "⌂" },
@@ -284,8 +285,7 @@ function MealPlanner({ onNavigate }) {
 
       <aside className="meal-sidebar">
         <div className="meal-logo">
-          <span className="logo-icon"></span>
-          <h2>Meal<span>Mind</span></h2>
+          <img className="meal-logo-image" src={logo} alt="MealMind" />
         </div>
 
         <p className="sidebar-label">MENU</p>

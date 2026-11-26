@@ -4,6 +4,7 @@ import { toDateInputValue } from "./mealPlanUtils";
 import { getMealMindStorageKey,  deleteMealPlanSnapshot, readMealPlanHistory} from "./mealPlanStorage";
 import { deleteMealPlan as deleteMealPlanFromApi, loadMealPlans } from "./mealPlanApi";
 import "./style.css";
+import logo from "../Pages/logo.png";
 
 const SHOPPING_CHECKED_KEY = getMealMindStorageKey("mealMindShoppingChecked");
 const MEAL_TYPES = ["Breakfast", "Lunch", "Snack", "Dinner"];
@@ -171,8 +172,7 @@ function ShoppingList({ onNavigate }) {
     <div className="meal-layout planner-layout">
       <aside className="meal-sidebar">
         <div className="meal-logo">
-          <span className="logo-icon">✿</span>
-          <h2>Meal<span>Mind</span></h2>
+          <img className="meal-logo-image" src={logo} alt="MealMind" />
         </div>
         <p className="sidebar-label">MENU</p>
         <div className="sidebar-links">
